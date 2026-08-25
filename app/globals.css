@@ -1,26 +1,183 @@
-@import "tailwindcss";
+/* ============================================================
+   MOODMATE — Flat Professional Theme
+   Mood tracking wellness companion
+   Zero gradients, solid fills, 4px grid
+   ============================================================ */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom properties for the flat theme */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --border: #E5E7EB;
+  --border-strong: #D1D5DB;
+  --ink: #111827;
+  --ink-secondary: #4B5563;
+  --ink-muted: #9CA3AF;
+  --accent: #A855F7;
+  --success: #059669;
+  --danger: #DC2626;
+  --warning: #D97706;
+  --card: #FFFFFF;
+  --muted: #6B7280;
+  --violet: #A855F7;
+  --amber: #D97706;
+  --fog: #6B7280;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base resets */
+html {
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Manrope', 'Baloo 2', 'Space Mono', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
 }
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: #9463F7;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-ghost:hover {
+  background: rgba(168, 85, 247, 0.1);
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+/* Cards */
+.card-surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Spacing */
+.p-1 { padding: 4px; }
+.p-2 { padding: 8px; }
+.p-3 { padding: 12px; }
+.p-4 { padding: 16px; }
+.p-5 { padding: 20px; }
+.p-6 { padding: 24px; }
+.p-8 { padding: 32px; }
+.p-10 { padding: 40px; }
+.p-12 { padding: 48px; }
+
+/* Text */
+.text-ink { color: var(--ink); }
+-text-muted { color: var(--muted); }
+.text-secondary { color: var(--ink-secondary); }
+.text-accent { color: var(--accent); }
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+.text-warning { color: var(--warning); }
+.text-violet { color: var(--violet); }
+.text-amber { color: var(--amber); }
+.text-fog { color: var(--fog); }
+
+/* Background */
+.bg-bg { background: var(--bg); }
+.bg-surface { background: var(--surface); }
+.bg-card { background: var(--card); }
+.bg-accent { background: var(--accent); }
+.bg-violet { background: var(--violet); }
+.bg-amber { background: var(--amber); }
+.bg-fog { background: var(--fog); }
+
+/* Border */
+.border-border { border: 1px solid var(--border); }
+.border-strong { border: 1px solid var(--border-strong); }
+
+/* Radius */
+.rounded-md { border-radius: 6px; }
+.rounded-10px { border-radius: 10px; }
+.rounded-full { border-radius: 9999px; }
+
+/* Shadow */
+.shadow-md { box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+.shadow-lg { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+
+/* Flex */
+.flex { display: flex; }
+.grid { display: grid; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+
+/* Utilities */
+.orbit-core { font-size: 3rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.xp-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.xp-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.3s ease; }
+.reward-preview { font-size: 11px; opacity: 0.8; margin-top: 4px; }
