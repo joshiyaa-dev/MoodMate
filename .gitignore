@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+build/
+
+# Capacitor native projects are regenerated with `npx cap add android`
+android/
+ios/
+
+.env
+.env.*
+*.tsbuildinfo
+.DS_Store
+
+# audio added in follow-up commits (GitHub push size limits)
+public/assets/music/

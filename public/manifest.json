@@ -1,0 +1,17 @@
+{
+  "name": "MoodMate — Daily Mood & Self-Care",
+  "short_name": "MoodMate",
+  "description": "Track your mood, journal, and practice self-care. All data stays on your device.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf2f8",
+  "theme_color": "#ec4899",
+  "icons": [
+    {
+      "src": "/mood-mate-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

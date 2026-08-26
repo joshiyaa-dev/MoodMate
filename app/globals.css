@@ -1,0 +1,516 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  
+  html {
+    /* Prevent zoom on mobile */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    /* Full height and fullscreen mobile */
+    height: 100%;
+    height: 100vh;
+    height: 100dvh;
+    /* Fullscreen mobile support */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Hide mobile browser UI */
+    overflow: hidden;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    /* Mobile optimizations */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Prevent bounce scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text selection on mobile */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Disable pull-to-refresh on mobile Chrome */
+    overscroll-behavior: none;
+  }
+  
+  /* Allow text selection for input elements */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
+  /* Mobile-first responsive typography */
+  h1 { @apply text-xl sm:text-2xl md:text-3xl; }
+  h2 { @apply text-lg sm:text-xl md:text-2xl; }
+  h3 { @apply text-base sm:text-lg md:text-xl; }
+  p { @apply text-sm sm:text-base; }
+  
+  /* Ensure full height for app container */
+  #__next, [data-reactroot] {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* Mobile-optimized container */
+@layer components {
+  .mobile-container {
+    @apply w-full max-w-md mx-auto px-3 py-2;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    max-width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Ensure safe area compliance + status bar */
+    padding-top: max(env(safe-area-inset-top), var(--status-bar-height, 24px));
+    padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+    padding-left: max(env(safe-area-inset-left), 0.75rem);
+    padding-right: max(env(safe-area-inset-right), 0.75rem);
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .mobile-card {
+    @apply p-4 rounded-xl shadow-sm;
+    min-height: auto;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* Better touch interaction */
+    touch-action: manipulation;
+    /* Prevent content overflow */
+    overflow: hidden;
+  }
+  
+  .mobile-button {
+    @apply h-11 px-4 py-2 text-sm rounded-lg;
+    min-height: 44px;
+    max-height: 52px;
+    touch-action: manipulation;
+    white-space: nowrap;
+    /* Better accessibility */
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-grid {
+    @apply grid gap-3;
+  }
+  
+  .mobile-text {
+    @apply text-sm;
+    line-height: 1.5;
+    font-size: clamp(0.875rem, 3.5vw, 1rem);
+    /* Better readability */
+    letter-spacing: 0.01em;
+  }
+  
+  .mobile-icon {
+    @apply w-5 h-5;
+    flex-shrink: 0;
+  }
+  
+  /* Game container optimizations */
+  .mobile-game-container {
+    @apply w-full max-w-full;
+    height: clamp(200px, 40vh, 320px);
+    max-height: 50vh;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  
+  /* Text constraints for mobile */
+  .mobile-heading {
+    @apply text-lg font-semibold;
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    line-height: 1.3;
+  }
+  
+  .mobile-subtext {
+    @apply text-sm;
+    font-size: clamp(0.8rem, 3vw, 0.875rem);
+    line-height: 1.4;
+    /* Better readability */
+    letter-spacing: 0.005em;
+  }
+  
+  /* Ensure no element exceeds viewport */
+  .mobile-constrained {
+    max-width: 100vw;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Better mobile scrolling */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Smooth scrolling for all containers */
+  .scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Better scroll performance */
+    will-change: scroll-position;
+    transform: translateZ(0);
+  }
+  
+  /* Better touch targets */
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    /* Better visual feedback */
+    transition: transform 0.1s ease;
+  }
+  
+  .touch-target:active {
+    transform: scale(0.98);
+  }
+  
+  /* Improved focus states for accessibility */
+  .focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  /* Enhanced mobile layouts */
+  .mobile-full-screen {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+  
+  .mobile-safe-area {
+    padding-top: max(env(safe-area-inset-top), var(--status-bar-height, 24px));
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Status bar aware containers */
+  .status-bar-safe {
+    padding-top: var(--status-bar-height, 24px);
+  }
+
+  .status-bar-margin {
+    margin-top: var(--status-bar-height, 24px);
+  }
+
+  /* Mobile app container */
+  .mobile-app-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Platform-specific adjustments */
+  .platform-ios {
+    --status-bar-height: 44px;
+  }
+
+  .platform-android {
+    --status-bar-height: 24px;
+  }
+
+  .platform-web {
+    --status-bar-height: 0px;
+  }
+
+  /* When mobile is ready and status bar is properly initialized */
+  body.mobile-ready.status-bar-aware {
+    padding-top: 0; /* Remove any default padding, let containers handle it */
+  }
+
+  body.mobile-ready .mobile-container {
+    /* Enhanced mobile container with proper status bar handling */
+    padding-top: max(env(safe-area-inset-top), var(--status-bar-height, 24px));
+  }
+  
+  /* Better card interactions */
+  .mobile-card-interactive {
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .mobile-card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-card-interactive:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive grid improvements */
+  .mobile-grid-responsive {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+  
+  @media (max-width: 380px) {
+    .mobile-grid-responsive {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* Custom animations for breathing bubble */
+@keyframes breathe-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+@keyframes breathe-out {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.breathe-in {
+  animation: breathe-in 4s ease-in-out;
+}
+
+.breathe-out {
+  animation: breathe-out 8s ease-in-out;
+}
+
+/* Spinner animation */
+@keyframes spin-wheel {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-animation {
+  animation: spin-wheel 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dark mode transitions */
+.dark-transition {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 🚀 KEYBOARD FIXES FOR MOBILE */
+/* Fix keyboard overlay issues */
+.keyboard-aware-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* When keyboard is open, reduce container height */
+.keyboard-open .keyboard-aware-container {
+  height: calc(100vh - var(--keyboard-height, 0px));
+  height: calc(100dvh - var(--keyboard-height, 0px));
+}
+
+/* Input fields that trigger keyboard */
+.mobile-input {
+  @apply w-full px-3 py-2 text-base border border-gray-300 rounded-lg;
+  font-size: 16px !important; /* Prevent zoom on iOS */
+  line-height: 1.5;
+  min-height: 44px;
+  touch-action: manipulation;
+  /* Better focus state */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Textarea for mobile */
+.mobile-textarea {
+  @apply w-full px-3 py-2 text-base border border-gray-300 rounded-lg resize-none;
+  font-size: 16px !important; /* Prevent zoom on iOS */
+  line-height: 1.5;
+  min-height: 100px;
+  touch-action: manipulation;
+  /* Better focus state */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Ensure inputs are always visible when focused */
+.input-container {
+  position: relative;
+}
+
+.input-container.focused {
+  z-index: 1000;
+}
+
+/* Fix for iOS keyboard pushing content */
+@supports (-webkit-touch-callout: none) {
+  .ios-keyboard-fix {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+  .ios-keyboard-fix input,
+  .ios-keyboard-fix textarea {
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+/* Android keyboard fixes */
+@media screen and (max-height: 500px) {
+  .mobile-container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .mobile-card {
+    padding: 0.75rem;
+  }
+}
+
+/* Scrollable input containers */
+.input-scroll-container {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Better visibility when keyboard is active */
+.keyboard-active-input {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dark .keyboard-active-input {
+  background: rgba(17, 24, 39, 0.95);
+}
