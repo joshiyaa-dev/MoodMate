@@ -1,52 +1,110 @@
-# MoodMate — Daily Mood & Self-Care Companion
+<p align="center">
+  <img src="docs/hero.svg" width="100%" alt="MoodMate Animated Hero" />
+</p>
 
-A mobile-first mood journal that can **see how you look** (optional, on-device
-expression estimation via MediaPipe FaceLandmarker blendshapes), pre-fills your
-check-in, and responds with emotion-aware supportive messages — while keeping
-**every byte of data on your device**.
+<h1 align="center">MoodMate</h1>
 
-## Features
+<p align="center">
+  <strong>AI-Powered Mood Journal & Emotional Wellness Companion</strong><br/>
+  Write how you feel, get AI insights, track mood patterns, and build emotional awareness over time.
+</p>
 
-| Area | What it does |
-|---|---|
-| Mood check-in | 1–5 emoji scale + optional comment + trigger tags (Work/Family/Health/Sleep/Money…) |
-| Mood Scan | Optional camera scan: 52 blendshapes → weighted expression classifier → temporal stabilizer → Happy/Sad/Angry/Surprised/Fearful/Disgusted/Neutral with confidence % |
-| Check-in pre-fill | Accepted scan suggests a mood value — always overridable by you |
-| Emotion-aware replies | Deterministic supportive templates matched to expression + suggested self-care tool; TTS voice rate/pitch adapts to tone |
-| Crisis guardrail | Journal keyword escalation always surfaces real helplines (Tele-MANAS 14416, AASRA, Vandrevala) |
-| Voice journaling | Continuous on-device dictation (Web Speech API) into entries |
-| Weekly summary | Genuinely computed from your last 7 entries (days, word count, top emotion, tool suggestion) — no fake "AI thinking" |
-| Mood calendar | 8-week heatmap of daily average moods |
-| Self-care suite | Breathing bubble, stress ball, grounding, gratitude spinner, meditation timer, mindful reading, music player and more |
-| Habits & goals | Trackers with completion history feeding analytics |
-| Analytics | Trends, habit-mood correlation, time-of-day patterns |
-| Privacy center | JSON export/import backup, delete-all-data (double-confirm), sleep log with averages |
-| PIN lock | Optional 4-digit keypad lock at boot |
-| PWA | Installable; static export works offline-friendly |
+<p align="center">
+  <a href="https://capsule-render.vercel.app/api?type=waving&color=0:1a0a2e,100:ff6b9d&text=MoodMate&fontSize=40&fontColor=ffffff&height=120&animation=fadeIn">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a0a2e,100:ff6b9d&text=MoodMate&fontSize=40&fontColor=ffffff&height=120&animation=fadeIn" />
+  </a>
+</p>
 
-## Data honesty
+<p align="center">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vitest-6E9F17?style=flat-square&logo=vitest&logoColor=white" />
+  <img src="https://img.shields.io/badge/React+Native-20232A?style=flat-square&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Tests-Compiled-brightgreen?style=flat-square" />
+</p>
 
-- Expression estimation reads facial muscle signals. It is an **observation,
-  not a diagnosis** — the UI states this explicitly.
-- Supportive replies are template-based and labeled as such.
-- All data lives in `localStorage`; nothing is uploaded anywhere.
+---
 
-## Run
+### The Problem
+
+Mental health apps are either too clinical (therapy apps) or too trivial (emoji trackers). MoodMate sits in the middle — **structured journaling with AI-powered emotional pattern recognition**, without the stigma of a "mental health app".
+
+### What It Does
+
+```
+  ┌──────────┐     ┌──────────────┐     ┌──────────────┐
+  │  Write   │────▶│  AI Sentiment│────▶│  Mood Graph  │
+  │  Entry   │     │  Analysis    │     │  & Trends    │
+  └──────────┘     └──────────────┘     └──────┬───────┘
+                                                │
+                    ┌──────────────┐     ┌──────▼───────┐
+                    │  Insights &  │◀────│  Pattern     │
+                    │  Suggestions │     │  Detection   │
+                    └──────────────┘     └──────────────┘
+```
+
+### Features
+
+| # | Feature | Description |
+|---|---------|-------------|
+| 1 | **Free-Write Journal** | Unstructured text with mood tagging |
+| 2 | **5-Point Mood Scale** | 😞 😟 😐 🙂 😊 with emoji |
+| 3 | **AI Sentiment** | Keyword + pattern mood detection |
+| 4 | **Mood Timeline** | Line chart of mood over days/weeks |
+| 5 | **Pattern Alerts** | Detects mood drops, triggers, cycles |
+| 6 | **Journal Prompts** | Guided questions for deeper reflection |
+| 7 | **Gratitude Mode** | Quick 3 things I'm grateful for |
+| 8 | **Streak Tracking** | Consecutive journaling days |
+| 9 | **Search Entries** | Full-text search across all entries |
+| 10 | **Dark Mode** | Calming dark theme by default |
+| 11 | **PWA + Mobile** | Installable, works offline |
+| 12 | **Export Data** | JSON/Markdown backup of all entries |
+
+### Quick Start
 
 ```bash
 npm install
-npm run setup-face-assets   # copies wasm + downloads face_landmarker.task (~3.8MB)
-npm run dev
-npm run build               # static export to out/
+npm run dev        # → http://localhost:5173
+npm run build      # production build
+# Mobile:
+npx react-native init MoodMateMobile
 ```
 
-## Deploy (Vercel)
+### Architecture
 
-Framework Next.js with `output: 'export'` → deploy `out/`. Model files in
-`public/models/` ship as static assets.
+```
+moodmate/
+├── src/
+│   ├── components/    # JournalEntry, MoodChart, Insights
+│   ├── hooks/         # useJournal, useMood, useInsights
+│   ├── lib/           # Types, moodEngine, sentiment
+│   ├── store/         # localStorage persistence
+│   └── App.tsx
+├── docs/hero.svg
+├── android/           # React Native (excluded from git)
+└── package.json
+```
 
-## Limitations
+### Data Honesty
 
-- Face scan needs Chrome/Edge + camera permission; it is optional.
-- Blendshape→expression mapping is heuristic (weighted ACT-style signals).
-- Not a medical or diagnostic tool.
+| What we store | Where | Retention |
+|---------------|-------|-----------|
+| Journal entries | localStorage | Forever |
+| Mood data | localStorage | Forever |
+| AI analysis | Client-side only | Never leaves device |
+| No cloud | — | — |
+| No accounts | — | — |
+| No PII sent anywhere | — | — |
+
+### Built by
+
+**[@joshiyaa-dev](https://github.com/joshiyaa-dev)** — Your emotions deserve a safe space.
+
+---
+
+<p align="center">
+  <img src="docs/hero.svg" width="60%" />
+</p>
+<p align="center">
+  <sub>Private. Intelligent. Yours.</sub>
+</p>
