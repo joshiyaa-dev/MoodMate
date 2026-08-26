@@ -12,5 +12,3 @@ ios/
 *.tsbuildinfo
 .DS_Store
 
-# audio added in follow-up commits (GitHub push size limits)
-public/assets/music/
