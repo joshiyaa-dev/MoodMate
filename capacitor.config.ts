@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.mindmate.app',
-  appName: 'Mind Mate',
+  appId: 'com.moodmate.app',
+  appName: 'Mood Mate',
   webDir: 'out',
   server: {
     androidScheme: 'https'
