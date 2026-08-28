@@ -2,5 +2,5 @@
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "next build",
   "outputDirectory": "out",
-  "framework": "nextjs"
+  "framework": null
 }
